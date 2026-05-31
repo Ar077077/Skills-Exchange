@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }} — Skills Exchange{% endblock %}
+
+{% block content %}
+<section class="course-hero">
+    <div class="course-hero-icon">{{ course.icon }}</div>
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+    <div class="course-stats">
+        <div class="stat"><strong>{{ course.lessons }}</strong><span>Lessons</span></div>
+        <div class="stat"><strong>{{ course.students }}</strong><span>Students</span></div>
+        <div class="stat"><strong>Free</strong><span>Price</span></div>
+    </div>
+    {% if session.get('username') %}
+        <a href="#" class="btn-primary">Enroll Now</a>
+    {% else %}
+        <a href="{{ url_for('signup') }}" class="btn-primary">Sign up to Enroll</a>
+    {% endif %}
+</section>
+
+<section class="course-content-section">
+    <h2>What you'll learn</h2>
+    <ul class="learn-list">
+        <li>✅ Core fundamentals of {{ course.title }}</li>
+        <li>✅ Practical hands-on projects</li>
+        <li>✅ Real-world examples from community teachers</li>
+        <li>✅ Certificate upon completion</li>
+    </ul>
+</section>
+
+<div class="back-link">
+    <a href="{{ url_for('courses') }}">← Back to Courses</a>
+</div>
+{% endblock %}

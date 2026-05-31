@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Courses — Skills Exchange{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>All Courses</h1>
+    <p>Choose your learning path</p>
+</section>
+
+<section class="courses-section">
+    <div class="courses-grid">
+        {% for course in courses %}
+        <a href="{{ url_for('course_detail', course_id=course.id) }}" class="course-card">
+            <div class="course-icon">{{ course.icon }}</div>
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="course-meta">
+                <span>{{ course.lessons }} lessons</span>
+                <span>{{ course.students }} students</span>
+            </div>
+            <div class="enroll-btn">View Course →</div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

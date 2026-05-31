@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel — Skills Exchange{% endblock %}
+
+{% block content %}
+<section class="admin-page">
+    <h1>Admin Panel</h1>
+
+    <div class="admin-stats">
+        <div class="admin-stat"><strong>{{ users|length }}</strong><span>Total Users</span></div>
+        <div class="admin-stat"><strong>{{ courses|length }}</strong><span>Courses</span></div>
+    </div>
+
+    <h2>All Users</h2>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.created_at }}</td>
+                <td>
+                    {% if user.username != session['username'] %}
+                    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}" onsubmit="return confirm('Delete this user?')">
+                        <button type="submit" class="btn-danger">Delete</button>
+                    </form>
+                    {% else %}
+                        <span class="badge">You</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Skills Exchange — Learn Together{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+        <span class="hero-badge">Community Learning</span>
+        <h1>Learn Any Skill<br><span class="accent">From Real People</span></h1>
+        <p>Programming, Web Design, Marketing, Digital Painting — taught by community members who are passionate about what they do.</p>
+        <div class="hero-btns">
+            <a href="{{ url_for('courses') }}" class="btn-primary">Browse Courses</a>
+            {% if not session.get('username') %}
+            <a href="{{ url_for('signup') }}" class="btn-outline">Join for Free</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="float-card">💻 Programming</div>
+        <div class="float-card delay1">🎨 Web Design</div>
+        <div class="float-card delay2">📊 Marketing</div>
+        <div class="float-card delay3">🖌️ Digital Painting</div>
+    </div>
+</section>
+
+<section class="courses-section">
+    <h2>Our Courses</h2>
+    <p class="section-sub">Start learning today — all taught by community experts</p>
+    <div class="courses-grid">
+        {% for course in courses %}
+        <a href="{{ url_for('course_detail', course_id=course.id) }}" class="course-card">
+            <div class="course-icon">{{ course.icon }}</div>
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="course-meta">
+                <span>{{ course.lessons }} lessons</span>
+                <span>{{ course.students }} students</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Have a skill to teach?</h2>
+    <p>Join our community and share your knowledge with others.</p>
+    <a href="{{ url_for('signup') }}" class="btn-primary">Become a Teacher</a>
+</section>
+{% endblock %}

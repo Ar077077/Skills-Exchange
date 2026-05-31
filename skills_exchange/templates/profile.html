@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Profile — Skills Exchange{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+    <div class="profile-header">
+        <div class="avatar">{{ session['username'][0].upper() }}</div>
+        <h2>{{ session['username'] }}</h2>
+        <p>{{ session.get('email', '') }}</p>
+    </div>
+    <div class="profile-body">
+        <h3>My Courses</h3>
+        <p class="empty-state">You haven't enrolled in any courses yet.<br>
+        <a href="{{ url_for('courses') }}">Browse courses →</a></p>
+    </div>
+    <a href="{{ url_for('logout') }}" class="btn-outline">Log out</a>
+</section>
+{% endblock %}
